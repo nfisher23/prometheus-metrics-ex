@@ -1,0 +1,29 @@
+version: '3'
+services:
+  prom:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: ../
+    volumes:
+      - /home/nick/.m2:/root/.m2
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/local
+    depends_on:
+      - db
+    ports:
+      - 9000:8080
+
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    env_file:
+      - database.env

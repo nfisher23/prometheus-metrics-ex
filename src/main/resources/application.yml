@@ -4,3 +4,18 @@ spring:
     password: pswd
     username: jack
     url: jdbc:postgresql://127.0.0.1:5432/local
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: metrics,info,health,prometheus
