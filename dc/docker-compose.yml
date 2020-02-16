@@ -1,0 +1,9 @@
+version: "3"
+services:
+  # psql --username=jack --port 5432 --host 127.0.0.1 -d local
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    env_file:
+      - database.env
