@@ -9,6 +9,17 @@ services:
     depends_on:
       - app
 
+  graf:
+    image: grafana/grafana
+    privileged: true
+    ports:
+      - 3000:3000
+    depends_on:
+      - prom
+    volumes:
+      - ./graf-data:/var/lib/grafana # note: need `chmod 777 graf-data` to do this
+
+  # `dc build` to rebuild
   app:
     build:
       context: ../

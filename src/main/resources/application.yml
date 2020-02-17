@@ -1,12 +1,37 @@
 spring:
+  sleuth:
+    log:
+      slf4j:
+        enabled: true
+    annotation:
+      enabled: true
   datasource:
     driver-class-name: org.postgresql.Driver
     password: pswd
     username: jack
     url: jdbc:postgresql://127.0.0.1:5432/local
 
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG # for zipkin stuff
+
+# I used a prebuilt dashboard with id 10280 to see stuff
 management:
   metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.50, 0.95, 0.99
+    web:
+      server:
+        request:
+          autotime:
+            enabled: true # don't need @Timed over all with this
     export:
       prometheus:
         enabled: true
