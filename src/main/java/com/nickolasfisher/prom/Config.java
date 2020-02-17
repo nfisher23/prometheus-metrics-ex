@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Config {
     // used https://grafana.com/grafana/dashboards/10280. Worked out nicely
+    // also check out https://grafana.com/grafana/dashboards/4701 and see if it's up to snuff
     @Bean
     MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
         return registry -> registry.config()
